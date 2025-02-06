@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .box {
+    width: 180px; /* 버튼 크기 조정 */
+    height: 180px;
+    background: #ffffff;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* 이미지 넘치는 것 방지 */
+    position: relative;
+  }
+  
+  .box:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* 🟢 이미지 미리보기 스타일 수정 */
+  .preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ✅ 이미지가 짤리지 않도록 함 */
+    border-radius: 10px;
+    position: absolute;
+    background-color: white; /* 배경색을 흰색으로 설정 */
+  }
+  

@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .options {
+    display: flex;
+    gap: 15px;
+  }
+  
+  button {
+    width: 100px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #ddd;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #bbb;
+  }
+  
+  /* 🟢 선택된 버튼 스타일 */
+  .active {
+    background-color: #4caf50;
+    color: white;
+  }
+  
