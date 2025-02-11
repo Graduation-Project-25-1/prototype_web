@@ -1,5 +1,5 @@
-import { useVirtualFitting } from "../../hooks/useVirtualFitting";
-import { useImageSelection } from "../../hooks/useImageSelection";
+import { useVirtualFitting } from "./hooks/useVirtualFitting"; 
+import { useImageSelection } from "./hooks/useImageSelection";
 import styles from "./VirtualFittingPage.module.css";
 import ImageSelection from "./components/ImageSelection";
 import CategorySelection from "./components/CategorySelection";

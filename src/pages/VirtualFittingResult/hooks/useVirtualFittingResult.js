@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { processVirtualFitting } from "api/virtualFitting";
+import { processVirtualFitting } from "../../../api/virtualFitting";
 
 export function useVirtualFittingResult() {
     const location = useLocation();
