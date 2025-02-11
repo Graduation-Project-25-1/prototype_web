@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { processVirtualFitting } from "api/virtualFitting";
-import { VirtualFittingRequest } from "api/virtualFitting/entity";
+import { processVirtualFitting, VirtualFittingRequest } from "@/api/virtualFitting";
+
 
 export function useVirtualFitting() {
     const [generatedImage, setGeneratedImage] = useState(null);

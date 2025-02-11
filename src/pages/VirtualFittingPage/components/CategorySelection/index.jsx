@@ -1,5 +1,6 @@
 import styles from "./CategorySelection.module.css";
 import { useState } from "react";
+import { Client } from '@gradio/client';
 
 export default function CategorySelection({ onCategorySelect }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
