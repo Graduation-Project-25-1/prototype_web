@@ -13,7 +13,7 @@ export function useVirtualFittingResult() {
     const clothingImageUrl = location.state?.clothingImage;
     const category = location.state?.category;
 
-    // ✅ API 요청을 직접 수행 (웹 이미지 URL 사용)
+    // ✅ API 요청 수행 (업로드된 URL 사용)
     const fetchVirtualFitting = useCallback(async () => {
         if (!userImageUrl || !clothingImageUrl || !category) {
             alert("잘못된 접근입니다.");
