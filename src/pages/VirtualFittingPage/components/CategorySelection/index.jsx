@@ -1,13 +1,19 @@
 import styles from "./CategorySelection.module.css";
 import { useState } from "react";
-import { Client } from '@gradio/client';
 
 export default function CategorySelection({ onCategorySelect }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
+    const categoryMap = {
+        "상의": "Upper-body",
+        "하의": "Lower-body",
+        "원피스": "Dress"
+    };
+
     const handleClick = (category) => {
-        setSelectedCategory(category);
-        onCategorySelect(category);
+        const apiCategory = categoryMap[category]; // ✅ API에 맞는 카테고리 변환
+        setSelectedCategory(apiCategory);
+        onCategorySelect(apiCategory);
     };
 
     return (
@@ -15,19 +21,19 @@ export default function CategorySelection({ onCategorySelect }) {
             <p>피팅 카테고리 선택</p>
             <div className={styles.options}>
                 <button
-                    className={selectedCategory === "상의" ? styles.active : ""}
+                    className={selectedCategory === "Upper-body" ? styles.active : ""}
                     onClick={() => handleClick("상의")}
                 >
                     상의
                 </button>
                 <button
-                    className={selectedCategory === "하의" ? styles.active : ""}
+                    className={selectedCategory === "Lower-body" ? styles.active : ""}
                     onClick={() => handleClick("하의")}
                 >
                     하의
                 </button>
                 <button
-                    className={selectedCategory === "원피스" ? styles.active : ""}
+                    className={selectedCategory === "Dress" ? styles.active : ""}
                     onClick={() => handleClick("원피스")}
                 >
                     원피스
