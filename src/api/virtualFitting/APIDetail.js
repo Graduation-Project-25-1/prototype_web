@@ -5,14 +5,14 @@ class VirtualFittingAPI {
   constructor(baseURL) {
     this.client = axios.create({
       baseURL,
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": "application/json" }, // ✅ JSON으로 변경
     });
   }
 
-  async processFitting(formData) {
+  async processFitting(data) { // ✅ JSON 데이터 처리
     try {
-      const response = await this.client.post("/process_dc", formData);
-      return new VirtualFittingResponse(response.data); // ✅ 응답을 VirtualFittingResponse로 변환
+      const response = await this.client.post("/run/process_dc", data); // ✅ JSON 데이터 전송
+      return new VirtualFittingResponse(response.data); 
     } catch (error) {
       console.error("API 요청 오류:", error);
       throw error;
