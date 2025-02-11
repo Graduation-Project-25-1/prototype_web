@@ -1,10 +1,7 @@
-import { useState } from "react";
-import { processVirtualFitting, VirtualFittingRequest } from "@/api/virtualFitting";
-
+import { useNavigate } from "react-router-dom";
 
 export function useVirtualFitting() {
-    const [generatedImage, setGeneratedImage] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate
 
     const startVirtualFitting = async (userImage, clothingImage, category) => {
         if (!userImage || !clothingImage) {
@@ -16,25 +13,9 @@ export function useVirtualFitting() {
             return;
         }
 
-        const requestData = new VirtualFittingRequest(userImage, clothingImage, category);
-
-        try {
-            setIsLoading(true);
-            const response = await processVirtualFitting(requestData.toFormData());
-            console.log("API 응답:", response);
-
-            if (response.image) {
-                setGeneratedImage(response.image);
-            } else {
-                alert("이미지 생성에 실패했습니다.");
-            }
-        } catch (error) {
-            console.error("가상 피팅 오류:", error);
-            alert("가상 피팅 요청 중 오류가 발생했습니다.");
-        } finally {
-            setIsLoading(false);
-        }
+        // API 호출 없이 바로 결과 페이지로 이동
+        navigate("/result", { state: { userImage, clothingImage, category } });
     };
 
-    return { generatedImage, isLoading, startVirtualFitting };
+    return { startVirtualFitting };
 }

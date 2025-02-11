@@ -1,5 +1,5 @@
-import { useVirtualFitting } from "./hooks/useVirtualFitting";
-import { useImageSelection } from "./hooks/useImageSelection";
+import { useVirtualFitting } from "../../hooks/useVirtualFitting";
+import { useImageSelection } from "../../hooks/useImageSelection";
 import styles from "./VirtualFittingPage.module.css";
 import ImageSelection from "./components/ImageSelection";
 import CategorySelection from "./components/CategorySelection";
@@ -14,7 +14,7 @@ export default function VirtualFittingPage() {
         handleCategorySelect,
     } = useImageSelection();
 
-    const { generatedImage, isLoading, startVirtualFitting, error } = useVirtualFitting();
+    const { startVirtualFitting } = useVirtualFitting();
 
     return (
         <div className={styles.container}>
@@ -29,22 +29,8 @@ export default function VirtualFittingPage() {
             <ImageSelection onSelect={handleImageSelect} />
             <CategorySelection onCategorySelect={handleCategorySelect} />
 
-            {/* 버튼 비활성화 추가 */}
-            <FitButton onClick={() => startVirtualFitting(selectedUserImage, selectedClothingImage, selectedCategory)} disabled={isLoading} />
-
-            {/* 로딩 표시 */}
-            {isLoading && <p className={styles.loading}>가상 피팅 중...</p>}
-
-            {/* 에러 메시지 출력 */}
-            {error && <p className={styles.errorMessage}>❌ {error}</p>}
-
-            {/* 결과 이미지 출력 */}
-            {generatedImage && (
-                <div>
-                    <h3>가상 피팅 결과</h3>
-                    <img src={generatedImage} alt="가상 피팅 결과" className={styles.resultImage} />
-                </div>
-            )}
+            {/* 버튼 클릭 시 결과 페이지로 이동 */}
+            <FitButton onClick={() => startVirtualFitting(selectedUserImage, selectedClothingImage, selectedCategory)} />
         </div>
     );
 }
