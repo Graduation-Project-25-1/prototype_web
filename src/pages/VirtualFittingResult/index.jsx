@@ -1,9 +1,9 @@
 import { useVirtualFittingResult } from "./hooks/useVirtualFittingResult";
-import LoadingSpinner from "./components/LoadingSpinner"; // ✅ 로딩 스피너 컴포넌트 추가
+import LoadingSpinner from "./components/LoadingSpinner";
 import styles from "./VirtualFittingResult.module.css";
 
 export default function VirtualFittingResult() {
-    const { generatedImage, isLoading, navigate } = useVirtualFittingResult();
+    const { generatedImage, isLoading, navigate, retryVirtualFitting } = useVirtualFittingResult();
 
     return (
         <div className={styles.container}>
@@ -17,9 +17,14 @@ export default function VirtualFittingResult() {
                 <p className={styles.errorMessage}>❌ 결과 이미지를 불러올 수 없습니다.</p>
             )}
 
-            <button className={styles.backButton} onClick={() => navigate("/")}>
-                다시 시도하기
-            </button>
+            <div className={styles.buttonContainer}>
+                <button className={styles.retryButton} onClick={retryVirtualFitting}>
+                    다시 시도하기
+                </button>
+                <button className={styles.prevButton} onClick={() => navigate(-1)}>
+                    이전 화면으로 돌아가기
+                </button>
+            </div>
         </div>
     );
 }

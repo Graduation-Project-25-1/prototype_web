@@ -13,12 +13,34 @@
     color: red;
 }
 
-.backButton {
+/* 🔹 버튼 컨테이너: 버튼들을 가로로 정렬 */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
     margin-top: 20px;
+}
+
+/* 🔹 다시 시도하기 버튼 */
+.backButton {
     padding: 10px 20px;
     background-color: #09f;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+}
+
+/* 🔹 이전 화면으로 돌아가기 버튼 */
+.prevButton {
+    padding: 10px 20px;
+    background-color: #ccc;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.prevButton:hover {
+    background-color: #bbb;
 }
