@@ -1,9 +1,6 @@
 import styles from "./CategorySelection.module.css";
-import { useState } from "react";
 
-export default function CategorySelection({ onCategorySelect }) {
-    const [selectedCategory, setSelectedCategory] = useState(null);
-
+export default function CategorySelection({ selectedCategory, onCategorySelect }) {
     const categoryMap = {
         "상의": "Upper-body",
         "하의": "Lower-body",
@@ -12,8 +9,7 @@ export default function CategorySelection({ onCategorySelect }) {
 
     const handleClick = (category) => {
         const apiCategory = categoryMap[category]; // ✅ API에 맞는 카테고리 변환
-        setSelectedCategory(apiCategory);
-        onCategorySelect(apiCategory);
+        onCategorySelect(apiCategory); // ✅ 부모 컴포넌트로 상태 전달
     };
 
     return (

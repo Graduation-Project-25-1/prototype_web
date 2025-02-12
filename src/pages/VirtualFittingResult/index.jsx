@@ -3,7 +3,7 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import styles from "./VirtualFittingResult.module.css";
 
 export default function VirtualFittingResult() {
-    const { generatedImage, isLoading, navigate, retryVirtualFitting } = useVirtualFittingResult();
+    const { generatedImage, isLoading, error, navigate, retryVirtualFitting } = useVirtualFittingResult();
 
     return (
         <div className={styles.container}>
@@ -11,8 +11,13 @@ export default function VirtualFittingResult() {
 
             {isLoading ? (
                 <LoadingSpinner />
+            ) : error ? (
+                <p className={styles.errorMessage}>❌ {error}</p>
             ) : generatedImage ? (
-                <img src={generatedImage} alt="가상 피팅 결과" className={styles.resultImage} />
+                <div className={styles.resultContainer}>
+                    <img src={generatedImage} alt="가상 피팅 결과" className={styles.resultImage} />
+                    <p>🔗 <a href={generatedImage} target="_blank" rel="noopener noreferrer">S3에서 직접 보기</a></p>
+                </div>
             ) : (
                 <p className={styles.errorMessage}>❌ 결과 이미지를 불러올 수 없습니다.</p>
             )}

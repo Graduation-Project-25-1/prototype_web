@@ -24,8 +24,7 @@ export class VirtualFittingRequest {
   
   export class VirtualFittingResponse {
     constructor(responseData) {
-      this.image = responseData?.[0]?.image || null;
-      this.caption = responseData?.[0]?.caption || "";
+        this.url = responseData?.url || null;  // ✅ FastAPI 응답 필드 `url` 사용
     }
-  }
+}
   

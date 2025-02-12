@@ -1,55 +1,27 @@
 import { useState } from "react";
+import { uploadToS3 } from "../../../api/uploadToS3"; // 경로 수정
 
 export function useImageSelection() {
-    // ✅ 세션 스토리지에서 기존 데이터 불러오기
-    const [selectedUserImage, setSelectedUserImage] = useState(() => {
-        const storedUserImage = sessionStorage.getItem("selectedUserImage");
-        return storedUserImage ? JSON.parse(storedUserImage) : null;
-    });
+  const [selectedUserImage, setSelectedUserImage] = useState(null);
+  const [selectedClothingImage, setSelectedClothingImage] = useState(null);
 
-    const [selectedClothingImage, setSelectedClothingImage] = useState(() => {
-        const storedClothingImage = sessionStorage.getItem("selectedClothingImage");
-        return storedClothingImage ? JSON.parse(storedClothingImage) : null;
-    });
+  const handleImageSelect = async (file, type) => {
+    if (!file) return;
 
-    const [selectedCategory, setSelectedCategory] = useState(() => {
-        return sessionStorage.getItem("selectedCategory") || null;
-    });
+    try {
+      const imageUrl = await uploadToS3(file); // S3에 업로드 후 URL 받기
 
-    // ✅ 이미지 선택 시 sessionStorage에도 저장
-    const handleImageSelect = (file, type) => {
-        if (!file) return;
+      if (imageUrl) {
         if (type === "user") {
-            setSelectedUserImage(file);
-            sessionStorage.setItem("selectedUserImage", JSON.stringify(file));
+          setSelectedUserImage(imageUrl);
         } else {
-            setSelectedClothingImage(file);
-            sessionStorage.setItem("selectedClothingImage", JSON.stringify(file));
+          setSelectedClothingImage(imageUrl);
         }
-    };
+      }
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+    }
+  };
 
-    // ✅ 카테고리 선택 시 sessionStorage에도 저장
-    const handleCategorySelect = (category) => {
-        setSelectedCategory(category);
-        sessionStorage.setItem("selectedCategory", category);
-    };
-
-    // ✅ 상태를 초기화하는 함수 추가 (새로운 시도를 원할 경우 호출)
-    const resetSelection = () => {
-        setSelectedUserImage(null);
-        setSelectedClothingImage(null);
-        setSelectedCategory(null);
-        sessionStorage.removeItem("selectedUserImage");
-        sessionStorage.removeItem("selectedClothingImage");
-        sessionStorage.removeItem("selectedCategory");
-    };
-
-    return {
-        selectedUserImage,
-        selectedClothingImage,
-        selectedCategory,
-        handleImageSelect,
-        handleCategorySelect,
-        resetSelection, // ✅ 상태 초기화 함수
-    };
+  return { selectedUserImage, selectedClothingImage, handleImageSelect };
 }
